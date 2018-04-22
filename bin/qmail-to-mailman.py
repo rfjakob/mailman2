@@ -1,0 +1,1 @@
+/etc/mailman/qmail-to-mailman.py
