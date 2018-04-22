@@ -230,14 +230,12 @@ def subscription_prompt(mlist, doc, cookie, userdesc):
     name = Utils.uncanonstr(userdesc.fullname, lang)
     i18n.set_language(lang)
     doc.set_language(lang)
-    title = _('Confirm subscription request')
+    title = _('Anmeldung abschlie&szlig;en')
     doc.SetTitle(title)
 
     form = Form(mlist.GetScriptURL('confirm', 1))
-    table = Table(border=0, width='100%')
-    table.AddRow([Center(Bold(FontAttr(title, size='+1')))])
-    table.AddCellInfo(table.GetCurrentRowIndex(), 0,
-                      colspan=2, bgcolor=mm_cfg.WEB_HEADER_COLOR)
+    table = Table(border=0)
+    table.AddRow([Bold(FontAttr(title, size='+2'))])
 
     listname = mlist.real_name
     # This is the normal, no-confirmation required results text.
@@ -245,67 +243,15 @@ def subscription_prompt(mlist, doc, cookie, userdesc):
     # We do things this way so we don't have to reformat this paragraph, which
     # would mess up translations.  If you modify this text for other reasons,
     # please refill the paragraph, and clean up the logic.
-    result = _("""Your confirmation is required in order to complete the
-    subscription request to the mailing list <em>%(listname)s</em>.  Your
-    subscription settings are shown below; make any necessary changes and hit
-    <em>Subscribe</em> to complete the confirmation process.  Once you've
-    confirmed your subscription request, you will be shown your account
-    options page which you can use to further customize your membership
-    options.
-
-    <p>Note: your password will be emailed to you once your subscription is
-    confirmed.  You can change it by visiting your personal options page.
-
-    <p>Or hit <em>Cancel my subscription request</em> if you no longer want to
-    subscribe to this list.""") + '<p><hr>'
-    if (mlist.subscribe_policy in (2, 3) and
-            not getattr(userdesc, 'invitation', False)):
-        # Confirmation is required
-        result = _("""Your confirmation is required in order to continue with
-        the subscription request to the mailing list <em>%(listname)s</em>.
-        Your subscription settings are shown below; make any necessary changes
-        and hit <em>Subscribe to list ...</em> to complete the confirmation
-        process.  Once you've confirmed your subscription request, the
-        moderator must approve or reject your membership request.  You will
-        receive notice of their decision.
-
-        <p>Note: your password will be emailed to you once your subscription
-        is confirmed.  You can change it by visiting your personal options
-        page.
-
-        <p>Or, if you've changed your mind and do not want to subscribe to
-        this mailing list, you can hit <em>Cancel my subscription
-        request</em>.""") + '<p><hr>'
+    result = _("<br>Um die Anmeldung der Email-Adresse <strong>" + email + "</strong> " +
+    """<br>zur Mailingliste <strong>%(listname)s</strong>
+    abzuschlie&szlig;en, klicken Sie bitte unten auf "Anmeldung best&auml;tigen".
+    """) + '<p><br>'
     table.AddRow([result])
-    table.AddCellInfo(table.GetCurrentRowIndex(), 0, colspan=2)
-
-    table.AddRow([Label(_('Your email address:')), email])
-    table.AddRow([Label(_('Your real name:')),
-                  TextBox('realname', name)])
-##    table.AddRow([Label(_('Password:')),
-##                  PasswordBox('password', password)])
-##    table.AddRow([Label(_('Password (confirm):')),
-##                  PasswordBox('pwconfirm', password)])
-    # Only give them a choice to receive digests if they actually have a
-    # choice <wink>.
-    if mlist.nondigestable and mlist.digestable:
-        table.AddRow([Label(_('Receive digests?')),
-                      RadioButtonArray('digests', (_('No'), _('Yes')),
-                                       checked=digest, values=(0, 1))])
-    langs = mlist.GetAvailableLanguages()
-    values = [_(Utils.GetLanguageDescr(l)) for l in langs]
-    try:
-        selected = langs.index(lang)
-    except ValueError:
-        selected = lang.index(mlist.preferred_language)
-    table.AddRow([Label(_('Preferred language:')),
-                  SelectOptions('language', langs, values, selected)])
     table.AddRow([Hidden('cookie', cookie)])
     table.AddCellInfo(table.GetCurrentRowIndex(), 0, colspan=2)
-    table.AddRow([
-        Label(SubmitButton('submit', _('Subscribe to list %(listname)s'))),
-        SubmitButton('cancel', _('Cancel my subscription request'))
-        ])
+
+    table.AddRow([SubmitButton('submit', 'Anmeldung best&auml;tigen')])
     form.AddItem(table)
     doc.AddItem(form)
 
