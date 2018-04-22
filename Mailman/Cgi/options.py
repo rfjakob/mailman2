@@ -186,7 +186,6 @@ def main():
                        user)
                 doc.addError(_('The confirmation email has been sent.'),
                              tag='')
-        loginpage(mlist, doc, user, language)
         print doc.Format()
         return
 
