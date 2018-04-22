@@ -336,19 +336,14 @@ def subscription_confirm(mlist, doc, cookie, cgidata):
             doc.set_language(lang)
             # The response
             listname = mlist.real_name
-            title = _('Subscription request confirmed')
+            title = 'Anmeldung best&auml;tigt'
             optionsurl = mlist.GetOptionsURL(addr, absolute=1)
             doc.SetTitle(title)
             doc.AddItem(Header(3, Bold(FontAttr(title, size='+2'))))
             doc.AddItem(_('''\
-            You have successfully confirmed your subscription request for
-            "%(addr)s" to the %(listname)s mailing list.  A separate
-            confirmation message will be sent to your email address, along
-            with your password, and other useful information and links.
-
-            <p>You can now
-            <a href="%(optionsurl)s">proceed to your membership login
-            page</a>.'''))
+            Die Anmeldung der Email-Adresse <strong>%(addr)s</strong> zur Mailingliste
+            <strong>%(listname)s</strong> ist hiermit best&auml;tigt.
+            '''))
         mlist.Save()
     finally:
         mlist.Unlock()
