@@ -1222,7 +1222,8 @@ class MailList(HTMLFormatter, Deliverer, ListAdmin,
                 # context is a Message and isn't relevant, so ignore it.
                 if isinstance(context, UserDesc):
                     userdesc += context
-                    whence = 'via web confirmation'
+                    ip = os.environ.get('REMOTE_HOST', os.environ.get('REMOTE_ADDR', 'unidentified origin'))
+                    whence = 'via web confirmation, ' + ip
                 addr = userdesc.address
                 fullname = userdesc.fullname
                 password = userdesc.password
