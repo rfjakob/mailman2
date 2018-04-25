@@ -1168,8 +1168,8 @@ def mass_subscribe(mlist, container):
     table.AddRow([
         Label(_('Subscribe these users now or invite them?')),
         RadioButtonArray('subscribe_or_invite',
-                         (_('Subscribe'), _('Invite')),
-                         0, values=(0, 1))
+                         (_('Invite'), '&#9760; sofort anmelden &#9760;'),
+                         0, values=(1, 0))
         ])
     table.AddCellInfo(table.GetCurrentRowIndex(), 0, bgcolor=GREY)
     table.AddCellInfo(table.GetCurrentRowIndex(), 1, bgcolor=GREY)
