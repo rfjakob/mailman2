@@ -1,0 +1,1 @@
+/etc/mailman/postfix-to-mailman.py
