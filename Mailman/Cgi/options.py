@@ -519,7 +519,7 @@ address.  Upon confirmation, any other mailing list containing the address
         owneraddr = mlist.GetOwnerEmail()
         url = mlist.GetScriptURL('listinfo', absolute=1)
 
-        title = _('Unsubscription results')
+        title = 'Abmeldung erfolgreich'
         doc.SetTitle(title)
         doc.AddItem(Header(2, title))
         if needapproval:
@@ -528,11 +528,9 @@ address.  Upon confirmation, any other mailing list containing the address
             receive notification once the list moderators have made their
             decision."""))
         else:
-            doc.AddItem(_("""You have been successfully unsubscribed from the
-            mailing list %(fqdn_listname)s.  If you were receiving digest
-            deliveries you may get one more digest.  If you have any questions
-            about your unsubscription, please contact the list owners at
-            %(owneraddr)s."""))
+            doc.AddItem(_("""Sie wurden erfolgreich von der Mailingliste
+            <strong>%(fqdn_listname)s</strong> abgemeldet.
+            """))
         doc.AddItem(mlist.GetMailmanFooter())
         print doc.Format()
         return
