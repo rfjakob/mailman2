@@ -214,6 +214,9 @@ def main():
 
     # Get the password from the form.
     password = cgidata.getvalue('password', '').strip()
+    # Alternatively accept "token"
+    if not password:
+        password = cgidata.getvalue('token', '').strip()
     # Check authentication.  We need to know if the credentials match the user
     # or the site admin, because they are the only ones who are allowed to
     # change things globally.  Specifically, the list admin may not change
