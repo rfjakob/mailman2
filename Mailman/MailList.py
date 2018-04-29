@@ -1,3 +1,5 @@
+# coding=utf-8
+
 # Copyright (C) 1998-2014 by the Free Software Foundation, Inc.
 #
 # This program is free software; you can redistribute it and/or
@@ -213,7 +215,7 @@ class MailList(HTMLFormatter, Deliverer, ListAdmin,
             cset = i18n.get_translation().charset() or \
                        Utils.GetCharSet(self.preferred_language)
             subj = Header(
-     _('Your confirmation is required to join the %(listname)s mailing list'),
+     _('[%(listname)s] Ihre Bestätigung ist nötig um Sie zur Liste %(listname)s anzumelden'),
                           cset, header_name='subject')
             return subj
         else:
