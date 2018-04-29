@@ -205,10 +205,11 @@ class MailList(HTMLFormatter, Deliverer, ListAdmin,
             return self.getListAddress('request')
 
     def GetConfirmEmail(self, cookie):
-        return mm_cfg.VERP_CONFIRM_FORMAT % {
+        addr = mm_cfg.VERP_CONFIRM_FORMAT % {
             'addr'  : '%s-confirm' % self.internal_name(),
             'cookie': cookie,
             } + '@' + self.host_name
+        return self.host_name + " <" + addr + ">"
 
     def GetConfirmJoinSubject(self, listname, cookie):
         if mm_cfg.VERP_CONFIRMATIONS and cookie:
