@@ -262,7 +262,7 @@ class MailList(HTMLFormatter, Deliverer, ListAdmin,
             user = Utils.ObscureEmail(user)
         return '%s/%s' % (url, urllib.quote(user.lower()))
 
-
+
     #
     # Instance and subcomponent initialization
     #
