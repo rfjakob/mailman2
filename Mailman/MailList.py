@@ -216,7 +216,7 @@ class MailList(HTMLFormatter, Deliverer, ListAdmin,
             cset = i18n.get_translation().charset() or \
                        Utils.GetCharSet(self.preferred_language)
             subj = Header(
-     _('[%(listname)s] Ihre Bestätigung ist nötig um Sie zur Liste %(listname)s anzumelden'),
+     _('Einladung zur Mailingliste %(listname)s'),
                           cset, header_name='subject')
             return subj
         else:
