@@ -925,12 +925,12 @@ class MailList(HTMLFormatter, Deliverer, ListAdmin,
                  'confirmurl'  : confirmurl,
                  }, lang=lang, mlist=self)
             msg = Message.UserNotification(
-                recipient, self.GetRequestEmail(cookie),
+                recipient, self.GetOwnerEmail(),  # return to owner!
                 text=text, lang=lang)
             # BAW: See ChangeMemberAddress() for why we do it this way...
             del msg['subject']
             msg['Subject'] = self.GetConfirmJoinSubject(realname, cookie)
-            msg['Reply-To'] = self.GetRequestEmail(cookie)
+            msg['Reply-To'] = self.GetOwnerEmail()  # return to owner!
             # Is this confirmation a reply to an email subscribe from this
             # address?
             if remote.lower().endswith(email.lower()):
