@@ -821,7 +821,7 @@ class MailList(HTMLFormatter, Deliverer, ListAdmin,
              'cookie'     : cookie,
              'listowner'  : self.GetOwnerEmail(),
              }, mlist=self)
-        sender = self.GetRequestEmail(cookie)
+        sender = self.GetOwnerEmail()
         msg = Message.UserNotification(
             invitee, sender,
             text=text, lang=self.preferred_language)
